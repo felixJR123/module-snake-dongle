@@ -23,6 +23,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #include "output_status.h"
 #include "helpers/display.h"
+#include <dt-bindings/zmk/outputs.h>
 
 Slot connectivity_slot;
 
