@@ -199,10 +199,17 @@ void print_bitmap_status(uint16_t *scaled_bitmap, Status s, uint16_t x, uint16_t
 }
 
 static struct output_status_state get_state(const zmk_event_t *_eh) {
+    struct zmk_endpoint_instance selected;
+
+#if IS_ENABLED(CONFIG_ZMK_ENDPOINTS)
+    selected = zmk_endpoints_selected();
+#else
+    // Default for dongles: Assume USB is the active transport
+    selected.transport = ZMK_TRANSPORT_USB;
+#endif
+
     return (struct output_status_state){
-        #if IS_ENABLED(CONFIG_ZMK_ENDPOINTS)
-                .selected_endpoint = zmk_endpoints_selected(),
-        #endif
+        .selected_endpoint = selected,
         .active_profile_index = zmk_ble_active_profile_index(),
         .active_profile_connected = zmk_ble_active_profile_is_connected(),
         .active_profile_bonded = !zmk_ble_active_profile_is_open(),
