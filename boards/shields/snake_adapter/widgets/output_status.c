@@ -20,6 +20,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/usb.h>
 #include <zmk/ble.h>
 #include <zmk/endpoints.h>
+#include <zmk/battery.h>
 
 #include "output_status.h"
 #include "helpers/display.h"
@@ -200,11 +201,11 @@ void print_bitmap_status(uint16_t *scaled_bitmap, Status s, uint16_t x, uint16_t
 
 static struct output_status_state get_state(const zmk_event_t *_eh) {
     return (struct output_status_state){
-        .selected_endpoint = zmk_endpoint_get_selected(), // <--- Correct name from your header
+        .selected_endpoint = zmk_endpoint_get_selected(),
         .active_profile_index = zmk_ble_active_profile_index(),
         .active_profile_connected = zmk_ble_active_profile_is_connected(),
         .active_profile_bonded = !zmk_ble_active_profile_is_open(),
-        .usb_is_hid_ready = (zmk_usb_get_status() == USB_DC_CONNECTED)
+        .usb_is_hid_ready = zmk_usb_is_hid_ready()
     };
 }
 
