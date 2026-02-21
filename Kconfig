@@ -1,3 +1,7 @@
+config ROTATE_DISPLAY
+    int "Rotate the display"
+    default 0
+
 config DEFAULT_SCREEN
     string "Default screen"
     default "snake"

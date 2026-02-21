@@ -20,7 +20,6 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/usb.h>
 #include <zmk/ble.h>
 #include <zmk/endpoints.h>
-#include <zmk/battery.h>
 
 #include "output_status.h"
 #include "helpers/display.h"
